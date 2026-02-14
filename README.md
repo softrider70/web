@@ -1,16 +1,16 @@
 # Web Projekte
 
 ## Beschreibung
-Verschiedene Webanwendungen für Synology DS918+ mit PHP-Unterstützung.
+Webanwendungen für Synology DS918+ mit modernen JavaScript-Frontends.
 
 ## Projektstruktur
 ```
 web/
 ├── franzoesische-verben/  # Französische Verben Abfrage
-├── test-website/         # Test-Website (veraltet)
-├── transfer.bat          # Windows Batch Übertragungsskript
-├── transfer.ps1          # PowerShell Übertragungsskript
-└── README.md            # Diese Datei
+├── verben-abfrage/        # Zukünftige Erweiterung (leer)
+├── transfer.bat           # Windows Batch Übertragungsskript
+├── transfer.ps1           # PowerShell Übertragungsskript
+└── README.md             # Diese Datei
 ```
 
 ## Hauptprojekte
