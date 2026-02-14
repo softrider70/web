@@ -277,3 +277,75 @@ bash deploy.sh
 - **Browser-Kompatibilität:** Moderner Browser mit localStorage-Unterstützung erforderlich
 - **Deployment:** Immer `deploy.sh` verwenden für konsistente Versionierung
 - **Mobile-Testing:** Cache leeren mit `Strg + F5` oder `Cmd + Shift + R` nach Updates
+- **⚠️ WICHTIG:** Bei jedem Deployment die Deploy-Version notieren für Fehleranalyse!
+
+## Chat-Protokoll & Implementierungs-Details
+
+### 🔄 **History-Problem identifiziert**
+- **Ursprünglicher Plan:** Serverseitige History-Speicherung
+- **Aktuelle Lösung:** Client-seitig (localStorage) wegen "keine PHP-Abhängigkeiten"
+- **Problem:** Pro Gerät getrennt, bei Cache-Löschung weg, 200 Einträge Limit
+
+### 🛠️ **Serverseitige History implementiert**
+**Deployment-Version:** `20260214-191605`
+
+#### **API-Endpunkte erstellt:**
+- `api/health.php` - Server-Statusprüfung mit Diagnose
+- `api/save_history.php` - History speichern mit User-ID und Fehlerbehandlung
+- `api/get_history.php` - History abrufen mit User-Filter und Limitierung
+
+#### **JavaScript-Hybrid-System:**
+- `HISTORY_CONFIG` mit Modi: 'local', 'server', 'hybrid'
+- `getUserId()` Funktion für User-Identifikation (localStorage + Cookie)
+- `checkServerAvailability()` mit automatischem Fallback
+- `saveToServer()` für serverseitige Speicherung
+- Retry-Logik mit max. 3 Versuchen und Timeout
+
+#### **Rücksprungpunkt-Strategie:**
+1. **Immer lokal speichern** (garantiert)
+2. **Zusätzlich serverseitig** bei Verfügbarkeit
+3. **Automatischer Wechsel** zu localStorage bei Server-Problemen
+4. **Manueller Not-Aus** über UI möglich
+
+### � **Fehlerbehebungen**
+**Deployment-Version:** `20260214-193346`
+
+#### **Kritischer Fehler behoben:**
+- **Problem:** `checkServerAvailability is not a function` - JavaScript-Absturz
+- **Ursache:** History-Erweiterung rief fehlende Funktion im Constructor auf
+- **Lösung:** `checkServerAvailability()` Funktion implementiert mit Server-Health-Check
+- **Auswirkung:** Unit-Auswahlliste war leer, Anwendung nicht funktionsfähig
+
+#### **Debug-Verbesserungen:**
+- Detaillierte Console-Logs in `loadUnits()` Funktion
+- Server-Verfügbarkeits-Prüfung mit Timeout
+- Bessere Fehlerbehandlung und Fallback-Logik
+
+### � **Deployment-Prozess**
+```bash
+# Deployment mit Versionsnummer
+bash deploy.sh
+# Ergebnis: Version 20260214-191605
+```
+
+### 📋 **Kritische Erfolge:**
+- ✅ **Keine PHP-Probleme mehr** durch saubere API-Implementierung
+- ✅ **Rücksprungpunkt funktioniert** - Anwendung immer lauffähig
+- ✅ **Hybrid-Modus** - Beste beider Welten
+- ✅ **Automatischer Fallback** - Kein manueller Eingriff nötig
+- ✅ **User-ID System** - Mehrere Nutzer möglich
+- ✅ **Deployment angepasst** - API-Dateien werden mitdeployed
+
+### 🔧 **Technische Entscheidungen:**
+- **JSON statt Datenbank:** Einfach, keine DB-Komplexität
+- **Cookie + localStorage:** User-ID persistent über Sessions
+- **Progressive Enhancement:** Funktioniert auch ohne Server
+- **CORS-Header:** Cross-Origin Requests erlaubt
+- **Fehlerbehandlung:** Detaillierte Status-Codes und Logs
+
+### 📊 **Aktueller Status:**
+- **Live-URL:** http://192.168.1.10/franzoesische-verben/
+- **History-Modus:** Hybrid (lokal + Server)
+- **Fallback:** Automatisch bei Server-Problemen
+- **Versionierung:** Deploy-Version in UI angezeigt
+- **Letztes Deployment:** `20260214-193346` (Fehlerfix für Unit-Auswahl)

@@ -132,7 +132,24 @@ class VerbQuiz {
         }
     }
     
+    async checkServerAvailability() {
+        try {
+            const response = await fetch('api/health.php', {
+                method: 'GET',
+                signal: AbortSignal.timeout(HISTORY_CONFIG.serverTimeout)
+            });
+            this.serverAvailable = response.ok;
+            console.log('🌐 Server-Verfügbarkeit:', this.serverAvailable);
+            return this.serverAvailable;
+        } catch (error) {
+            console.log('❌ Server nicht erreichbar:', error.message);
+            this.serverAvailable = false;
+            return false;
+        }
+    }
+    
     async loadUnits() {
+        console.log('🔄 Starte loadUnits()...');
         try {
             // Feste Unit-Liste mit bekannten Dateien
             const knownFiles = [
@@ -141,27 +158,36 @@ class VerbQuiz {
                 { file: 'unit4_circumflex.json', name: 'unit4_circumflex' },
                 { file: 'unit4_sonderzeichen.json', name: 'unit4_sonderzeichen' }
             ];
+            console.log('📁 Bekannte Dateien:', knownFiles);
             
             this.units = [];
             
             for (const unitInfo of knownFiles) {
+                console.log(`🔍 Lade ${unitInfo.file}...`);
                 try {
                     const unitResponse = await fetch(`./data/${unitInfo.file}`);
+                    console.log(`📡 Fetch-Status für ${unitInfo.file}:`, unitResponse.status, unitResponse.ok);
                     if (unitResponse.ok) {
                         const data = await unitResponse.json();
+                        console.log(`✅ ${unitInfo.file} geladen, ${data.length} Einträge`);
                         this.units.push({
                             id: this.units.length + 1,
                             name: unitInfo.name,
                             file: unitInfo.file,
                             count: data.length
                         });
+                    } else {
+                        console.warn(`⚠️ ${unitInfo.file} nicht OK:`, unitResponse.status);
                     }
                 } catch (error) {
-                    console.warn(`Unit ${unitInfo.file} konnte nicht geladen werden:`, error);
+                    console.warn(`❌ Unit ${unitInfo.file} konnte nicht geladen werden:`, error);
                 }
             }
             
+            console.log('📊 Geladene Units:', this.units);
+            
             if (this.units.length === 0) {
+                console.log('🔄 Keine Units gefunden, verwende Fallback...');
                 // Fallback auf fest codierte Units
                 this.units = [
                     { id: 1, name: 'unit1', count: 15 },
@@ -170,9 +196,10 @@ class VerbQuiz {
                 ];
             }
             
+            console.log('🎯 Rendere Units:', this.units);
             this.renderUnits();
         } catch (error) {
-            console.error('Fehler beim Laden der Units:', error);
+            console.error('💥 Fehler beim Laden der Units:', error);
             // Fallback auf fest codierte Units
             this.units = [
                 { id: 1, name: 'unit1', count: 15 },
