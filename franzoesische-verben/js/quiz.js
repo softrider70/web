@@ -3,6 +3,27 @@
 window.__FRANZOESISCHE_VERBEN_QUIZ_VERSION__ = '2026-02-14T16:20';
 console.log('quiz.js version:', window.__FRANZOESISCHE_VERBEN_QUIZ_VERSION__);
 
+// History-Konfiguration für serverseitige Speicherung mit Fallback
+const HISTORY_CONFIG = {
+    mode: 'hybrid',        // 'local', 'server', 'hybrid'
+    fallback: true,        // Bei Server-Problemen automatisch zu local wechseln
+    syncInterval: 5000,    // Sync alle 5 Sekunden versuchen
+    maxRetries: 3,         // Nach 3 Fehlversuchen aufgeben
+    serverTimeout: 3000    // Server-Timeout in Millisekunden
+};
+
+// User-ID System
+function getUserId() {
+    let userId = localStorage.getItem('user_id');
+    if (!userId) {
+        userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('user_id', userId);
+        // Auch als Cookie für PHP-Zugriff setzen
+        document.cookie = `user_id=${userId}; max-age=31536000; path=/`;
+    }
+    return userId;
+}
+
 // Verb-Daten direkt eingebettet
 const VERB_DATA = {
     unit1: [
@@ -61,16 +82,19 @@ const VERB_DATA = {
 
 class VerbQuiz {
     constructor() {
-        this.units = [];
         this.selectedUnits = [];
         this.quizMode = 'de-fr';
-        this.quizActive = false;
+        this.currentVerb = null;
         this.score = 0;
         this.totalQuestions = 0;
-        this.currentQuestion = null;
-        this.verbData = {};
-        this.strictAccents = false; // Neue Eigenschaft für Akzent-Prüfung (default: aus)
-        this.strictUmlauts = false; // Neue Eigenschaft für Umlaut-Prüfung (default: aus)
+        this.serverRetryCount = 0;
+        this.serverAvailable = false;
+        
+        // User-ID initialisieren
+        getUserId();
+        
+        // Server-Verfügbarkeit prüfen
+        this.checkServerAvailability();
         
         this.initializeEventListeners();
         this.loadUnits();
@@ -78,10 +102,10 @@ class VerbQuiz {
     
     initializeEventListeners() {
         // Event Listener für Buttons
-        document.getElementById('start-quiz').addEventListener('click', () => this.startQuiz());
+        document.getElementById('start-quiz').addEventListener('click', async () => await this.startQuiz());
         document.getElementById('show-stats').addEventListener('click', () => this.showStats());
-        document.getElementById('next-question').addEventListener('click', () => this.nextQuestion());
-        document.getElementById('end-quiz').addEventListener('click', () => this.endQuiz());
+        document.getElementById('next-question').addEventListener('click', async () => await this.nextQuestion());
+        document.getElementById('end-quiz').addEventListener('click', async () => await this.endQuiz());
         document.getElementById('close-stats').addEventListener('click', () => this.hideStats());
         
         // Event Listener für Abfragemodus
@@ -327,7 +351,7 @@ class VerbQuiz {
         return fallbackData[unitId] || [];
     }
     
-    nextQuestion() {
+    async nextQuestion() {
         if (!this.quizActive) return;
         
         const verbs = Object.values(this.verbData).flat();
@@ -541,9 +565,9 @@ class VerbQuiz {
         return normalized;
     }
     
-    endQuiz() {
+    async endQuiz() {
         this.quizActive = false;
-        this.saveStats();
+        await this.saveStats();
         
         // Zeige Ergebnis
         const percentage = this.totalQuestions > 0 ? Math.round((this.score / this.totalQuestions) * 100) : 0;
@@ -629,11 +653,49 @@ class VerbQuiz {
         }
     }
 
-    saveHistory(history) {
+    async saveHistory(history) {
+        // Immer lokal speichern (garantiert)
         localStorage.setItem('quiz_history', JSON.stringify(history));
+        
+        // Zusätzlich versuchen serverseitig zu speichern
+        if (HISTORY_CONFIG.mode === 'server' || HISTORY_CONFIG.mode === 'hybrid') {
+            if (this.serverAvailable || await this.checkServerAvailability()) {
+                await this.saveToServer(history);
+            }
+        }
     }
     
-    saveStats() {
+    async saveToServer(history) {
+        try {
+            // Nur den neuesten Eintrag an den Server senden
+            const latestEntry = history[0];
+            if (!latestEntry) return;
+            
+            const response = await fetch('api/save_history.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    date: latestEntry.datetime,
+                    units: latestEntry.units,
+                    mode: latestEntry.mode,
+                    score: latestEntry.score
+                })
+            });
+            
+            if (response.ok) {
+                const result = await response.json();
+                console.log('✅ History auf Server gespeichert:', result.id);
+            } else {
+                console.log('⚠️ Server-Speicherung fehlgeschlagen');
+            }
+        } catch (error) {
+            console.log('❌ Server-Fehler bei History-Speicherung:', error.message);
+        }
+    }
+    
+    async saveStats() {
         const percent = this.totalQuestions > 0 ? Math.round((this.score / this.totalQuestions) * 100) : 0;
         const now = new Date();
         const dt = now.toLocaleString('de-DE');
@@ -652,7 +714,7 @@ class VerbQuiz {
             history.pop();
         }
 
-        this.saveHistory(history);
+        await this.saveHistory(history);
     }
 }
 

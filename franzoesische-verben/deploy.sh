@@ -55,13 +55,13 @@ ssh -i "$SSH_KEY" $REMOTE_USER@$REMOTE_HOST "sudo rm -rf $REMOTE_PATH && mkdir -
 
 # Kopiere Dateien zur Synology
 echo "Kopiere Dateien zur Synology..."
-# Übertrage Dateien mit tar über SSH
+# Übertrage Dateien mit tar über SSH (inklusive API-Dateien)
 tar -czf - -C "$LOCAL_PATH" \
     --exclude='.git*' \
     --exclude='deploy.sh' \
-    --exclude='apache-config' \
     --exclude='README.md.bak' \
-    . | ssh -i "$SSH_KEY" $REMOTE_USER@$REMOTE_HOST "tar -xzf - -C $REMOTE_PATH"
+    --exclude='setup_database.php' \
+    . | ssh -i "$SSH_KEY" $REMOTE_USER@$REMOTE_HOST "tar -xzf - -C $REMOTE_PATH && mkdir -p $REMOTE_PATH/data && chmod 755 $REMOTE_PATH/data"
 
 if [ $? -eq 0 ]; then
     echo "Dateien erfolgreich kopiert!"
