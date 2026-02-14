@@ -64,11 +64,12 @@ class VerbQuiz {
         this.units = [];
         this.selectedUnits = [];
         this.quizMode = 'de-fr';
-        this.currentQuestion = null;
+        this.quizActive = false;
         this.score = 0;
         this.totalQuestions = 0;
-        this.quizActive = false;
+        this.currentQuestion = null;
         this.verbData = {};
+        this.strictAccents = true; // Neue Eigenschaft für Akzent-Prüfung
         
         this.initializeEventListeners();
         this.loadUnits();
@@ -88,15 +89,23 @@ class VerbQuiz {
                 this.quizMode = e.target.value;
             });
         });
+        
+        // Event Listener für Akzent-Checkbox
+        const strictAccentsCheckbox = document.getElementById('strict-accents');
+        if (strictAccentsCheckbox) {
+            strictAccentsCheckbox.addEventListener('change', (e) => {
+                this.strictAccents = e.target.checked;
+            });
+        }
     }
     
     async loadUnits() {
         try {
             // Feste Unit-Liste mit bekannten Dateien
             const knownFiles = [
-                { file: 'unit1.json', name: 'unit1' },
                 { file: 'unit1_volet1.json', name: 'unit1_volet1' },
-                { file: 'unit3_volet3.json', name: 'unit3_volet3' }
+                { file: 'unit3_volet3.json', name: 'unit3_volet3' },
+                { file: 'unit4_circumflex.json', name: 'unit4_circumflex' }
             ];
             
             this.units = [];
@@ -349,20 +358,20 @@ class VerbQuiz {
         
         switch (this.quizMode) {
             case 'de-fr':
-                question = `Französisch für: ${this.currentQuestion.deutsch}`;
-                expectedAnswer = this.currentQuestion.franzosisch;
+                question = `Französisch für: ${this.currentQuestion.bedeutung || this.currentQuestion.deutsch}`;
+                expectedAnswer = this.currentQuestion.infinitiv || this.currentQuestion.franzosisch;
                 break;
             case 'fr-de':
-                question = `Deutsch für: ${this.currentQuestion.franzosisch}`;
-                expectedAnswer = this.currentQuestion.deutsch;
+                question = `Deutsch für: ${this.currentQuestion.infinitiv || this.currentQuestion.franzosisch}`;
+                expectedAnswer = this.currentQuestion.bedeutung || this.currentQuestion.deutsch;
                 break;
             case 'mixed':
                 if (Math.random() < 0.5) {
-                    question = `Französisch für: ${this.currentQuestion.deutsch}`;
-                    expectedAnswer = this.currentQuestion.franzosisch;
+                    question = `Französisch für: ${this.currentQuestion.bedeutung || this.currentQuestion.deutsch}`;
+                    expectedAnswer = this.currentQuestion.infinitiv || this.currentQuestion.franzosisch;
                 } else {
-                    question = `Deutsch für: ${this.currentQuestion.franzosisch}`;
-                    expectedAnswer = this.currentQuestion.deutsch;
+                    question = `Deutsch für: ${this.currentQuestion.infinitiv || this.currentQuestion.franzosisch}`;
+                    expectedAnswer = this.currentQuestion.bedeutung || this.currentQuestion.deutsch;
                 }
                 break;
         }
@@ -377,13 +386,7 @@ class VerbQuiz {
         // Enter-Taste für Antwort
         document.getElementById('user-answer').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                const feedback = document.getElementById('feedback');
-                const hasFeedback = feedback.textContent.trim() !== '';
-                if (hasFeedback) {
-                    this.nextQuestion();
-                } else {
-                    this.checkAnswer(expectedAnswer);
-                }
+                this.checkAnswer(expectedAnswer);
             }
         });
         
@@ -396,41 +399,43 @@ class VerbQuiz {
         let correctAnswer = '';
         
         if (isGermanQuestion) {
-            question = `Französisch für: ${this.currentQuestion.deutsch}`;
-            correctAnswer = this.currentQuestion.franzosisch;
+            question = `Französisch für: ${this.currentQuestion.bedeutung || this.currentQuestion.deutsch}`;
+            correctAnswer = this.currentQuestion.infinitiv || this.currentQuestion.franzosisch;
         } else {
-            question = `Deutsch für: ${this.currentQuestion.franzosisch}`;
-            correctAnswer = this.currentQuestion.deutsch;
+            question = `Deutsch für: ${this.currentQuestion.infinitiv || this.currentQuestion.franzosisch}`;
+            correctAnswer = this.currentQuestion.bedeutung || this.currentQuestion.deutsch;
         }
         
         questionText.textContent = question;
         
         // Generiere Multiple-Choice-Optionen
         const options = this.generateMultipleChoiceOptions(correctAnswer);
-        
+
         const choicesHtml = options.map((option, index) => `
             <div class="choice-option" onclick="quiz.selectMultipleChoice(${index}, '${correctAnswer}')">
                 ${option}
             </div>
         `).join('');
-        
+
         answerContainer.innerHTML = `<div class="multiple-choice">${choicesHtml}</div>`;
     }
-    
+
     generateMultipleChoiceOptions(correctAnswer) {
         const allVerbs = Object.values(this.verbData).flat();
         const options = [correctAnswer];
-        
+
         // Füge 4 zufällige falsche Optionen hinzu
         while (options.length < 5) {
             const randomVerb = allVerbs[Math.floor(Math.random() * allVerbs.length)];
-            const wrongAnswer = Math.random() < 0.5 ? randomVerb.deutsch : randomVerb.franzosisch;
+            const wrongAnswer = Math.random() < 0.5 ? 
+                (randomVerb.bedeutung || randomVerb.deutsch) : 
+                (randomVerb.infinitiv || randomVerb.franzosisch);
             
             if (!options.includes(wrongAnswer)) {
                 options.push(wrongAnswer);
             }
         }
-        
+
         // Mische die Optionen
         return options.sort(() => Math.random() - 0.5);
     }
@@ -491,10 +496,29 @@ class VerbQuiz {
     }
     
     normalizeAnswer(answer) {
-        return answer.toLowerCase()
-                   .trim()
-                   .replace(/[.,!?;:]/g, '')
-                   .replace(/\s+/g, ' ');
+        let normalized = answer.toLowerCase()
+                           .trim()
+                           .replace(/[.,!?;:]/g, '')
+                           .replace(/\s+/g, ' ')
+                           .replace(/\s+(qc|qn)$/, '') // Entferne qc/qn am Ende
+                           .replace(/\s+(qc|qn)\s+/, ' '); // Entferne qc/qn in der Mitte;
+        
+        // Wenn Akzente nicht streng geprüft werden sollen, entferne sie
+        if (!this.strictAccents) {
+            // Ersetze Akzente durch Basis-Buchstaben
+            const accentMap = {
+                'à': 'a', 'â': 'a', 'ä': 'a',
+                'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
+                'î': 'i', 'ï': 'i', 'ì': 'i',
+                'ô': 'o', 'ö': 'o', 'ò': 'o',
+                'ù': 'u', 'û': 'u', 'ü': 'u',
+                'ç': 'c', 'ñ': 'n'
+            };
+            
+            normalized = normalized.split('').map(char => accentMap[char] || char).join('');
+        }
+        
+        return normalized;
     }
     
     endQuiz() {

@@ -1,0 +1,299 @@
+[
+    {
+        "deutsch": "fühlen, spüren",
+        "franzosisch": "sentir qc",
+        "person": "ich fühle",
+        "conjugation": "je sens",
+        "type": "unregelmäßiges Verb mit circumflex",
+        "accent": "^",
+        "beispiel": "Je sens le parfum des fleurs."
+    },
+    {
+        "deutsch": "wissen, kennen",
+        "franzosisch": "connaître qn/qc",
+        "person": "ich kenne",
+        "conjugation": "je connais",
+        "type": "unregelmäßiges Verb mit circumflex",
+        "accent": "^",
+        "beispiel": "Je connais bien cette ville."
+    },
+    {
+        "deutsch": "öffnen",
+        "franzosisch": "ouvrir qc",
+        "person": "ich öffne",
+        "conjugation": "j'ouvre",
+        "type": "unregelmäßiges Verb mit circumflex",
+        "accent": "^",
+        "beispiel": "J'ouvre la fenêtre le matin."
+    },
+    {
+        "deutsch": "glauben, denken",
+        "franzosisch": "croire qn/qc",
+        "person": "ich glaube",
+        "conjugation": "je crois",
+        "type": "unregelmäßiges Verb mit circumflex",
+        "accent": "^",
+        "beispiel": "Je crois ce que tu dis."
+    },
+    {
+        "deutsch": "müssen",
+        "franzosisch": "devoir + Infinitiv",
+        "person": "ich muss",
+        "conjugation": "je dois",
+        "type": "unregelmäßiges Verb mit circumflex",
+        "accent": "^",
+        "beispiel": "Je dois faire mes devoirs."
+    },
+    {
+        "deutsch": "empfangen, erhalten",
+        "franzosisch": "recevoir qc",
+        "person": "ich erhalte",
+        "conjugation": "je reçois",
+        "type": "unregelmäßiges Verb mit circumflex",
+        "accent": "^",
+        "beispiel": "Je reçois beaucoup de lettres."
+    },
+    {
+        "deutsch": "sehen",
+        "franzosisch": "voir qn/qc",
+        "person": "ich sehe",
+        "conjugation": "je vois",
+        "type": "unregelmäßiges Verb mit circumflex",
+        "accent": "^",
+        "beispiel": "Je vois le soleil depuis ma fenêtre."
+    },
+    {
+        "deutsch": "können",
+        "franzosisch": "pouvoir + Infinitiv",
+        "person": "ich kann",
+        "conjugation": "je peux",
+        "type": "unregelmäßiges Verb mit circumflex",
+        "accent": "^",
+        "beispiel": "Je peux venir demain."
+    },
+    {
+        "deutsch": "wollen",
+        "franzosisch": "vouloir + Infinitiv",
+        "person": "ich will",
+        "conjugation": "je veux",
+        "type": "unregelmäßiges Verb mit circumflex",
+        "accent": "^",
+        "beispiel": "Je veux manger au restaurant."
+    },
+    {
+        "deutsch": "kommen",
+        "franzosisch": "venir",
+        "person": "ich komme",
+        "conjugation": "je viens",
+        "type": "unregelmäßiges Verb mit circumflex",
+        "accent": "^",
+        "beispiel": "Je viens de Paris."
+    },
+    {
+        "deutsch": "gehen",
+        "franzosisch": "aller",
+        "person": "ich gehe",
+        "conjugation": "je vais",
+        "type": "unregelmäßiges Verb mit Akzent",
+        "accent": "´",
+        "beispiel": "Je vais à l'école tous les jours."
+    },
+    {
+        "deutsch": "haben",
+        "franzosisch": "avoir qc",
+        "person": "ich habe",
+        "conjugation": "j'ai",
+        "type": "unregelmäßiges Verb mit Akzent",
+        "accent": "´",
+        "beispiel": "J'ai un chat noir."
+    },
+    {
+        "deutsch": "sein",
+        "franzosisch": "être",
+        "person": "ich bin",
+        "conjugation": "je suis",
+        "type": "unregelmäßiges Verb mit Akzent",
+        "accent": "^",
+        "beispiel": "Je suis étudiant."
+    },
+    {
+        "deutsch": "essen",
+        "franzosisch": "manger qc",
+        "person": "ich esse",
+        "conjugation": "je mange",
+        "type": "regelmäßiges Verb mit Akzent",
+        "accent": "´",
+        "beispiel": "Je mange des fruits le matin."
+    },
+    {
+        "deutsch": "trinken",
+        "franzosisch": "boire qc",
+        "person": "ich trinke",
+        "conjugation": "je bois",
+        "type": "unregelmäßiges Verb mit Akzent",
+        "accent": "´",
+        "beispiel": "Je bois de l'eau tous les jours."
+    },
+    {
+        "deutsch": "sagen",
+        "franzosisch": "dire qc",
+        "person": "ich sage",
+        "conjugation": "je dis",
+        "type": "unregelmäßiges Verb mit Akzent",
+        "accent": "´",
+        "beispiel": "Je dis la vérité."
+    },
+    {
+        "deutsch": "machen",
+        "franzosisch": "faire qc",
+        "person": "ich mache",
+        "conjugation": "je fais",
+        "type": "unregelmäßiges Verb mit Akzent",
+        "accent": "´",
+        "beispiel": "Je fais mon lit chaque matin."
+    },
+    {
+        "deutsch": "geben",
+        "franzosisch": "donner qc",
+        "person": "ich gebe",
+        "conjugation": "je donne",
+        "type": "regelmäßiges Verb mit Akzent",
+        "accent": "´",
+        "beispiel": "Je donne des cadeaux pour Noël."
+    },
+    {
+        "deutsch": "kaufen",
+        "franzosisch": "acheter qc",
+        "person": "ich kaufe",
+        "conjugation": "j'achète",
+        "type": "unregelmäßiges Verb mit Akzent",
+        "accent": "´",
+        "beispiel": "J'achète du pain à la boulangerie."
+    },
+    {
+        "deutsch": "lieben, mögen",
+        "franzosisch": "aimer qn/qc",
+        "person": "ich liebe",
+        "conjugation": "j'aime",
+        "type": "regelmäßiges Verb mit Akzent",
+        "accent": "´",
+        "beispiel": "J'aime la musique classique."
+    },
+    {
+        "deutsch": "hinausgehen, ausgehen",
+        "franzosisch": "sortir",
+        "person": "ich gehe hinaus",
+        "conjugation": "je sors",
+        "type": "unregelmäßiges Verb mit Gravis",
+        "accent": "`",
+        "beispiel": "Je sors avec mes amis le samedi."
+    },
+    {
+        "deutsch": "schreiben",
+        "franzosisch": "écrire qc",
+        "person": "ich schreibe",
+        "conjugation": "j'écris",
+        "type": "unregelmäßiges Verb mit Akzent",
+        "accent": "´",
+        "beispiel": "J'écris une lettre à ma grand-mère."
+    },
+    {
+        "deutsch": "lesen",
+        "franzosisch": "lire qc",
+        "person": "ich lese",
+        "conjugation": "je lis",
+        "type": "unregelmäßiges Verb mit Gravis",
+        "accent": "`",
+        "beispiel": "Je lis des romans français."
+    },
+    {
+        "deutsch": "anrufen",
+        "franzosisch": "téléphoner à qn",
+        "person": "ich rufe an",
+        "conjugation": "je téléphone",
+        "type": "regelmäßiges Verb mit Akzent",
+        "accent": "´",
+        "beispiel": "Je téléphone à mes parents chaque semaine."
+    },
+    {
+        "deutsch": "arbeiten",
+        "franzosisch": "travailler",
+        "person": "ich arbeite",
+        "conjugation": "je travaille",
+        "type": "regelmäßiges Verb mit Akzent",
+        "accent": "´",
+        "beispiel": "Je travaille dans un bureau."
+    },
+    {
+        "deutsch": "wohnen, leben",
+        "franzosisch": "habiter",
+        "person": "ich wohne",
+        "conjugation": "j'habite",
+        "type": "regelmäßiges Verb mit Akzent",
+        "accent": "´",
+        "beispiel": "J'habite à Lyon depuis cinq ans."
+    },
+    {
+        "deutsch": "sprechen",
+        "franzosisch": "parler",
+        "person": "ich spreche",
+        "conjugation": "je parle",
+        "type": "regelmäßiges Verb mit Akzent",
+        "accent": "´",
+        "beispiel": "Je parle français couramment."
+    },
+    {
+        "deutsch": "verstehen",
+        "franzosisch": "comprendre qc",
+        "person": "ich verstehe",
+        "conjugation": "je comprends",
+        "type": "unregelmäßiges Verb mit Gravis",
+        "accent": "`",
+        "beispiel": "Je comprends les explications du professeur."
+    },
+    {
+        "deutsch": "schlafen",
+        "franzosisch": "dormir",
+        "person": "ich schlafe",
+        "conjugation": "je dors",
+        "type": "unregelmäßiges Verb mit Gravis",
+        "accent": "`",
+        "beispiel": "Je dors huit heures par nuit."
+    },
+    {
+        "deutsch": "dienen",
+        "franzosisch": "servir qc",
+        "person": "ich diene",
+        "conjugation": "je sers",
+        "type": "unregelmäßiges Verb mit Gravis",
+        "accent": "`",
+        "beispiel": "Je sers le petit-déjeuner à ma famille."
+    },
+    {
+        "deutsch": "bieten",
+        "franzosisch": "offrir qc",
+        "person": "ich biete",
+        "conjugation": "j'offre",
+        "type": "unregelmäßiges Verb mit Gravis",
+        "accent": "`",
+        "beispiel": "J'offre des fleurs à ma mère."
+    },
+    {
+        "deutsch": "folgen",
+        "franzosisch": "suivre qn/qc",
+        "person": "ich folge",
+        "conjugation": "je suis",
+        "type": "unregelmäßiges Verb mit Gravis",
+        "accent": "`",
+        "beispiel": "Je suis les cours de maths."
+    },
+    {
+        "deutsch": "leben, existieren",
+        "franzosisch": "vivre",
+        "person": "ich lebe",
+        "conjugation": "je vis",
+        "type": "unregelmäßiges Verb mit Gravis",
+        "accent": "`",
+        "beispiel": "Je vis heureux avec ma famille."
+    }
+]

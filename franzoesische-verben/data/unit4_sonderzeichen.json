@@ -1,0 +1,250 @@
+[
+    {
+        "deutsch": "Insel",
+        "franzosisch": "île",
+        "accent": "^",
+        "vowel": "i",
+        "uebung": "Setze den Circumflex auf das i: île",
+        "beispiel": "La Corse est une belle île."
+    },
+    {
+        "deutsch": "Wald",
+        "franzosisch": "forêt",
+        "accent": "^",
+        "vowel": "e",
+        "uebung": "Setze den Circumflex auf das e: forêt",
+        "beispiel": "Nous nous promenons dans la forêt."
+    },
+    {
+        "deutsch": "Tempel",
+        "franzosisch": "temple",
+        "accent": "^",
+        "vowel": "e",
+        "uebung": "Setze den Circumflex auf das e: temple",
+        "beispiel": "Le temple est très ancien."
+    },
+    {
+        "deutsch": "Fest",
+        "franzosisch": "fête",
+        "accent": "^",
+        "vowel": "e",
+        "uebung": "Setze den Circumflex auf das e: fête",
+        "beispiel": "Nous organisons une fête pour ton anniversaire."
+    },
+    {
+        "deutsch": "Meister",
+        "franzosisch": "maître",
+        "accent": "^",
+        "vowel": "i",
+        "uebung": "Setze den Circumflex auf das i: maître",
+        "beispiel": "Le maître explique la leçon."
+    },
+    {
+        "deutsch": "Gast",
+        "franzosisch": "hôte",
+        "accent": "^",
+        "vowel": "o",
+        "uebung": "Setze den Circumflex auf das o: hôte",
+        "beispiel": "Notre hôte est très gentil."
+    },
+    {
+        "deutsch": "Fluss",
+        "franzosisch": "fleuve",
+        "accent": "^",
+        "vowel": "e",
+        "uebung": "Setze den Circumflex auf das e: fleuve",
+        "beispiel": "Le fleuve coule vers la mer."
+    },
+    {
+        "deutsch": "krank",
+        "franzosisch": "malade",
+        "accent": "´",
+        "vowel": "e",
+        "uebung": "Setze den Akut auf das e: malade",
+        "beispiel": "Je suis malade aujourd'hui."
+    },
+    {
+        "deutsch": "Schule",
+        "franzosisch": "école",
+        "accent": "´",
+        "vowel": "e",
+        "uebung": "Setze den Akut auf das e: école",
+        "beispiel": "Les enfants vont à l'école."
+    },
+    {
+        "deutsch": "Kaffee",
+        "franzosisch": "café",
+        "accent": "´",
+        "vowel": "e",
+        "uebung": "Setze den Akut auf das e: café",
+        "beispiel": "Je bois un café le matin."
+    },
+    {
+        "deutsch": "Menü",
+        "franzosisch": "menu",
+        "accent": "´",
+        "vowel": "e",
+        "uebung": "Setze den Akut auf das e: menu",
+        "beispiel": "Le restaurant propose un bon menu."
+    },
+    {
+        "deutsch": "spielen",
+        "franzosisch": "jouer",
+        "accent": "´",
+        "vowel": "e",
+        "uebung": "Setze den Akut auf das e: jouer",
+        "beispiel": "Les enfants jouent dans le jardin."
+    },
+    {
+        "deutsch": "lieben",
+        "franzosisch": "aimer",
+        "accent": "´",
+        "vowel": "e",
+        "uebung": "Setze den Akut auf das e: aimer",
+        "beispiel": "J'aime beaucoup ma famille."
+    },
+    {
+        "deutsch": "schön",
+        "franzosisch": "beau",
+        "accent": "´",
+        "vowel": "e",
+        "uebung": "Setze den Akut auf das e: beau",
+        "beispiel": "C'est un beau jour d'été."
+    },
+    {
+        "deutsch": "schreiben",
+        "franzosisch": "écrire",
+        "accent": "´",
+        "vowel": "e",
+        "uebung": "Setze den Akut auf das e: écrire",
+        "beispiel": "J'écris une lettre à mon ami."
+    },
+    {
+        "deutsch": "lernen",
+        "franzosisch": "apprendre",
+        "accent": "´",
+        "vowel": "e",
+        "uebung": "Setze den Akut auf das e: apprendre",
+        "beispiel": "J'apprends le français à l'école."
+    },
+    {
+        "deutsch": "wohnen",
+        "franzosisch": "habiter",
+        "accent": "´",
+        "vowel": "e",
+        "uebung": "Setze den Akut auf das e: habiter",
+        "beispiel": "J'habite à Paris."
+    },
+    {
+        "deutsch": "Treppe",
+        "franzosisch": "escalier",
+        "accent": "´",
+        "vowel": "e",
+        "uebung": "Setze den Akut auf das e: escalier",
+        "beispiel": "Je monte l'escalier pour aller au premier étage."
+    },
+    {
+        "deutsch": "Schlüssel",
+        "franzosisch": "clé",
+        "accent": "´",
+        "vowel": "e",
+        "uebung": "Setze den Akut auf das e: clé",
+        "beispiel": "J'ai perdu les clés de la maison."
+    },
+    {
+        "deutsch": "woher?",
+        "franzosisch": "d'où",
+        "accent": "`",
+        "vowel": "o",
+        "uebung": "Setze den Gravis auf das o: d'où",
+        "beispiel": "D'où viens-tu?"
+    },
+    {
+        "deutsch": "da",
+        "franzosisch": "là",
+        "accent": "`",
+        "vowel": "a",
+        "uebung": "Setze den Gravis auf das a: là",
+        "beispiel": "Le livre est là-bas."
+    },
+    {
+        "deutsch": "schon",
+        "franzosisch": "déjà",
+        "accent": "`",
+        "vowel": "a",
+        "uebung": "Setze den Gravis auf das a: déjà",
+        "beispiel": "J'ai déjà mangé."
+    },
+    {
+        "deutsch": "nur",
+        "franzosisch": "seulement",
+        "accent": "`",
+        "vowel": "e",
+        "uebung": "Setze den Gravis auf das e: seulement",
+        "beispiel": "Je veux seulement un café."
+    },
+    {
+        "deutsch": "müssen",
+        "franzosisch": "devoir",
+        "accent": "`",
+        "vowel": "e",
+        "uebung": "Setze den Gravis auf das e: devoir",
+        "beispiel": "Je dois faire mes devoirs."
+    },
+    {
+        "deutsch": "seit",
+        "franzosisch": "depuis",
+        "accent": "`",
+        "vowel": "e",
+        "uebung": "Setze den Gravis auf das e: depuis",
+        "beispiel": "J'habite ici depuis 2020."
+    },
+    {
+        "deutsch": "während",
+        "franzosisch": "pendant",
+        "accent": "`",
+        "vowel": "e",
+        "uebung": "Setze den Gravis auf das e: pendant",
+        "beispiel": "Je lis pendant mon temps libre."
+    },
+    {
+        "deutsch": "Mutter",
+        "franzosisch": "mère",
+        "accent": "`",
+        "vowel": "e",
+        "uebung": "Setze den Gravis auf das e: mère",
+        "beispiel": "Ma mère s'appelle Marie."
+    },
+    {
+        "deutsch": "Vater",
+        "franzosisch": "père",
+        "accent": "`",
+        "vowel": "e",
+        "uebung": "Setze den Gravis auf das e: père",
+        "beispiel": "Mon père travaille à Lyon."
+    },
+    {
+        "deutsch": "Schwester",
+        "franzosisch": "sœur",
+        "accent": "^",
+        "vowel": "e",
+        "uebung": "Setze den Circumflex auf das e: sœur",
+        "beispiel": "Ma sœur étudie la médecine."
+    },
+    {
+        "deutsch": "Bruder",
+        "franzosisch": "frère",
+        "accent": "`",
+        "vowel": "e",
+        "uebung": "Setze den Gravis auf das e: frère",
+        "beispiel": "Mon frère aime le football."
+    },
+    {
+        "deutsch": "Früstück",
+        "franzosisch": "petit-déjeuner",
+        "accent": "´",
+        "vowel": "e",
+        "uebung": "Setze den Akut auf das e: petit-déjeuner",
+        "beispiel": "Je prends le petit-déjeuner à 7 heures."
+    }
+]

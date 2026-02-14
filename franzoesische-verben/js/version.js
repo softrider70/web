@@ -1,4 +1,4 @@
-window.__FRANZOESISCHE_VERBEN_DEPLOY_VERSION__ = '20260214-173727';
+window.__FRANZOESISCHE_VERBEN_DEPLOY_VERSION__ = '20260214-181600';
 
 document.addEventListener('DOMContentLoaded', () => {
     const els = document.querySelectorAll('[data-app-version]');
