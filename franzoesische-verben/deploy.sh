@@ -25,7 +25,7 @@ EOF
 
 sed -i "s#__DEPLOY_VERSION__#${DEPLOY_VERSION}#g" "$LOCAL_PATH/js/version.js"
 
-sed -i 's#js/version\.js?v=[^" ]*#js/version.js?v='"$DEPLOY_VERSION"'#g' "$LOCAL_PATH/index.html" "$LOCAL_PATH/test.html"
+sed -i 's#js/version\.js?v=[^" ]*#js/version.js?v='"$DEPLOY_VERSION"'#g' "$LOCAL_PATH/index.html"
 sed -i 's#js/quiz\.js?v=[^" ]*#js/quiz.js?v='"$DEPLOY_VERSION"'#g' "$LOCAL_PATH/index.html"
 
 echo "=== Deployment französische Verben ==="

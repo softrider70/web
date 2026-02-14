@@ -1,7 +1,7 @@
 # Französische Verben - Webanwendung
 
 ## Projektbeschreibung
-Webanwendung zum Abfragen französischer Verben auf Synology DS918 mit Nginx/PHP-FPM. Die Anwendung verwendet client-seitige JavaScript-Logik mit localStorage für Statistiken.
+Webanwendung zum Abfragen französischer Verben auf Synology DS918. Die Anwendung verwendet client-seitige JavaScript-Logik mit localStorage für Statistiken - vollständig ohne PHP-Abhängigkeiten.
 
 ## Funktionen
 - **Quiz-Modi:**
@@ -9,10 +9,10 @@ Webanwendung zum Abfragen französischer Verben auf Synology DS918 mit Nginx/PHP
   - Französisch-Deutsch  
   - Automatisch gemischt
   - Multiple Choice (5 Wörter zur Auswahl)
-- **Unit-Auswahl:** Checkboxen für verschiedene Verb-Units (Unit 1-3)
+- **Unit-Auswahl:** Checkboxen für verschiedene Verb-Units (Unit 1-4)
 - **Zufällige Vorauswahl:** Beim Seitenstart werden zufällig Units vorausgewählt (mindestens eine)
 - **Keyboard-Navigation:** Return-Taste prüft Antwort, zweites Return springt zur nächsten Frage
-- **Statistiken:** Historische Quiz-Ergebnisse in localStorage gespeichert, tabellarische Ansicht
+- **Statistiken:** Quiz-Ergebnisse werden client-seitig im localStorage gespeichert (max. 200 Einträge). **Hinweis:** Ursprünglich war serverseitige Speicherung geplant, wurde aufgrund der "keine PHP-Abhängigkeiten"-Anforderung auf localStorage umgestellt.
 - **Versionierung:** Deploy-Version wird auf jeder Seite angezeigt
 - **Responsive Design:** Mobile-freundliche Oberfläche
 
@@ -41,7 +41,6 @@ Webanwendung zum Abfragen französischer Verben auf Synology DS918 mit Nginx/PHP
 ```
 franzoesische-verben/
 ├── index.html          # Hauptseite mit Quiz-Interface
-├── test.html           # Testseite
 ├── data/               # Verb-Dateien nach Units und Volets
 │   ├── unit1_volet1.json
 │   ├── unit3_volet3.json
@@ -50,6 +49,7 @@ franzoesische-verben/
 │   └── style.css
 ├── js/
 │   └── quiz.js
+├── deploy.sh           # Deployment-Skript für Synology
 └── README.md
 ```
 
@@ -81,7 +81,7 @@ Jedes Wort enthält:
 - [x] Projektstruktur angelegt
 - [x] HTML-Grundgerät mit Checkbox-Unit-Auswahl
 - [x] JavaScript-Quiz-Logik implementiert
-- [x] Verb-Daten direkt in JavaScript eingebettet (PHP-Umgehung)
+- [x] Verb-Daten direkt in JavaScript eingebettet
 - [x] Return-Taste für Antwortprüfung und Weiterleitung
 - [x] localStorage für Quiz-Historie implementiert
 - [x] Tabellarische Statistik-Ansicht mit korrekter Ausrichtung
@@ -95,7 +95,7 @@ Jedes Wort enthält:
 ### 🔄 Aktuelle Implementierung
 - **Frontend:** Reine JavaScript-Anwendung ohne PHP-Abhängigkeiten
 - **Daten:** Verb-Daten werden dynamisch aus JSON-Dateien im data/-Verzeichnis geladen
-- **Statistiken:** Client-seitig in localStorage (max. 200 Einträge)
+- **Statistiken:** Client-seitig in localStorage (max. 200 Einträge) aufgrund der "keine PHP-Abhängigkeiten"-Anforderung. Ursprünglich serverseitige Speicherung geplant.
 - **Deployment:** Automatisches Deploy mit Versionierung
 - **Unit-Erkennung:** Automatische Erkennung verfügbarer Unit-Dateien (unit1_volet1.json, unit3_volet3.json, unit4_sonderzeichen.json)
 
@@ -117,6 +117,43 @@ bash deploy.sh
 - **SSH-Key:** ~/.ssh/id_ed25519_ds918_new
 - **Remote Path:** /volume1/web/franzoesische-verben
 - **Web-URL:** http://192.168.1.10/franzoesische-verben/
+
+### SSH-Einrichtung (wichtig für passwortlosen Zugriff)
+**Falls SSH-Zugriff noch nicht konfiguriert ist - diese Schritte befolgen:**
+
+1. **SSH-Key prüfen/erstellen:**
+   ```bash
+   # Prüfen ob Key existiert
+   ls -la ~/.ssh/id_ed25519_ds918_new
+   
+   # Falls nicht vorhanden, erstellen:
+   ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_ds918_new -N ""
+   ```
+
+2. **⚠️ WICHTIG: Berechtigungen setzen (häufige Fehlerquelle!):**
+   ```bash
+   chmod 600 ~/.ssh/id_ed25519_ds918_new
+   chmod 644 ~/.ssh/id_ed25519_ds918_new.pub
+   chmod 700 ~/.ssh
+   ```
+
+3. **Public Key zum Server kopieren:**
+   ```bash
+   ssh-copy-id -i ~/.ssh/id_ed25519_ds918_new.pub ds918admin@192.168.1.10
+   ```
+
+4. **Verbindung testen (vor Deployment!):**
+   ```bash
+   ssh -i ~/.ssh/id_ed25519_ds918_new ds918admin@192.168.1.10 "echo 'SSH-Verbindung erfolgreich'"
+   ```
+
+**🔧 Häufige Probleme & Lösungen:**
+- **"Permission denied":** Berechtigungen prüfen (Schritt 2)
+- **"Connection refused":** SSH-Dienst auf Synology aktivieren
+- **"Host key verification failed":** `ssh-keygen -R 192.168.1.10`
+- **Key funktioniert nicht:** Im deploy.sh wird der Key automatisch getestet
+
+**💡 Merke:** Das deploy.sh Skript enthält einen SSH-Test und bricht bei Problemen ab!
 
 ### Versionierung
 - Deploy-Version wird oben links auf jeder Seite angezeigt
@@ -197,6 +234,30 @@ bash deploy.sh
 
 ## Offene Punkte
 
+### History-Speicherung (Architektur-Entscheidung)
+**Aktueller Status:** Client-seitige localStorage Speicherung
+- **Vorteile:** Keine PHP-Abhängigkeiten, offline-fähig, schnell
+- **Nachteile:** Pro Gerät getrennt, bei Cache-Löschung weg, 200 Einträge Limit
+
+**Zukünftige Migration zu serverseitiger Speicherung:**
+```php
+// Geplante API-Endpunkte für zukünftige Implementation
+/api/save_history.php    // Quiz-Ergebnis speichern
+/api/get_history.php     // History abrufen
+/api/export_history.php  // History als JSON exportieren
+```
+
+**Migrationsstrategie:**
+1. **Hybrid-Ansatz:** localStorage + periodischer Server-Sync
+2. **Export-Funktion:** History als JSON herunterladen und manuell sichern
+3. **Volle Migration:** Serverseitige Speicherung mit PHP/JSON oder SQLite
+
+**Technische Anforderungen für Server-Implementierung:**
+- PHP-Endpunkte für History-CRUD Operationen
+- JSON-Datei auf Server oder SQLite-Datenbank
+- User-Identifikation (Cookie/IP) für History-Zuordnung
+- Import/Export-Funktion für Datenmigration
+
 ### Performance-Optimierung
 - **Große JSON-Dateien:** Unit4 mit 32 Sonderzeichen-Übungen
 - **Mögliche Lösung:** Lazy Loading oder Datei-Aufteilung
@@ -211,6 +272,7 @@ bash deploy.sh
 
 ## Wichtige Hinweise
 - **Keine PHP-Abhängigkeiten:** Vollständige client-seitige Funktionalität
+- **History-Speicherung:** Aktuell client-seitig (localStorage), serverseitige Speicherung geplant (siehe "Offene Punkte")
 - **localStorage-Grenze:** Maximal 200 Quiz-Einträge werden gespeichert
 - **Browser-Kompatibilität:** Moderner Browser mit localStorage-Unterstützung erforderlich
 - **Deployment:** Immer `deploy.sh` verwenden für konsistente Versionierung
