@@ -23,8 +23,8 @@ body {
 
 header {
     text-align: center;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
     border-bottom: 2px solid #007bff;
 }
 
@@ -41,8 +41,8 @@ h2 {
 }
 
 section {
-    margin-bottom: 30px;
-    padding: 20px;
+    margin-bottom: 20px;
+    padding: 15px;
     background-color: #f9f9f9;
     border-radius: 8px;
     border: 1px solid #ddd;
@@ -71,7 +71,7 @@ section {
 .mode-options label {
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 8px;
     background-color: white;
     border: 2px solid #ddd;
     border-radius: 5px;
@@ -98,7 +98,7 @@ section {
 .unit-checkbox {
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 8px;
     background-color: white;
     border: 2px solid #ddd;
     border-radius: 5px;
@@ -152,45 +152,76 @@ button {
 #quiz-area {
     background-color: #f8f9fa;
     border: 2px solid #007bff;
+    padding: 10px !important;
+    margin-bottom: 10px !important;
 }
 
-.question-container {
-    margin-bottom: 20px;
-}
-
-#question-text {
-    font-size: 1.3em;
-    color: #007bff;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-#answer-container {
-    margin-bottom: 20px;
-}
-
-.answer-input {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.multiple-choice {
+.quiz-options {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px !important;
+    margin-bottom: 8px !important;
 }
 
-.choice-option {
-    padding: 15px;
+.quiz-options label {
+    display: flex;
+    align-items: center;
+    padding: 4px !important;
     background-color: white;
     border: 2px solid #ddd;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-size: 12px !important;
+}
+
+.quiz-options label:hover {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+}
+
+.quiz-options input[type="checkbox"] {
+    margin-right: 6px !important;
+}
+
+.question-container {
+    margin-bottom: 8px !important;
+}
+
+#question-text {
+    font-size: 1.0em !important;
+    color: #007bff;
+    margin-bottom: 8px !important;
+    text-align: center;
+}
+
+#answer-container {
+    margin-bottom: 8px !important;
+}
+
+.answer-input {
+    width: 100%;
+    padding: 6px !important;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 5px !important;
+}
+
+.multiple-choice {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px !important;
+}
+
+.choice-option {
+    padding: 8px !important;
+    background-color: white;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 13px !important;
 }
 
 .choice-option:hover {
@@ -204,11 +235,12 @@ button {
 }
 
 .feedback {
-    padding: 15px;
+    padding: 6px !important;
     border-radius: 5px;
-    margin-top: 15px;
+    margin-top: 5px !important;
     font-weight: bold;
     text-align: center;
+    font-size: 12px !important;
 }
 
 .feedback.correct {
@@ -225,11 +257,20 @@ button {
 
 .quiz-navigation {
     text-align: center;
+    margin-bottom: 5px !important;
+    position: sticky;
+    bottom: 10px;
+    background: rgba(248, 249, 250, 0.95);
+    padding: 3px !important;
+    border-radius: 5px;
 }
 
 #next-question {
     background-color: #007bff;
     color: white;
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+    margin: 1px 0 !important;
 }
 
 #next-question:hover {
@@ -239,6 +280,9 @@ button {
 #end-quiz {
     background-color: #dc3545;
     color: white;
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+    margin: 1px 0 !important;
 }
 
 #end-quiz:hover {
@@ -251,13 +295,13 @@ button {
 }
 
 #stats-content {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .stat-item {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: 8px;
     background-color: white;
     margin-bottom: 5px;
     border-radius: 5px;
@@ -273,26 +317,170 @@ button {
     background-color: #5a6268;
 }
 
-/* Responsive Design */
+/* Mobile-spezifische Stile - überschreibt alles */
 @media (max-width: 768px) {
+    /* Quiz-Bereich komplett neu definieren */
+    #quiz-area {
+        padding: 5px !important;
+        margin-bottom: 5px !important;
+        background-color: #f8f9fa !important;
+        border: 1px solid #007bff !important;
+    }
+    
+    /* Quiz-Optionen extrem klein */
+    .quiz-options {
+        display: block !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .quiz-options label {
+        display: block !important;
+        padding: 2px 4px !important;
+        font-size: 11px !important;
+        margin-bottom: 2px !important;
+        background-color: white !important;
+        border: 1px solid #ddd !important;
+        border-radius: 3px !important;
+    }
+    
+    .quiz-options input[type="checkbox"] {
+        margin-right: 4px !important;
+        transform: scale(0.8);
+    }
+    
+    /* Frage extrem klein */
+    #question-text {
+        font-size: 14px !important;
+        margin-bottom: 5px !important;
+        padding: 3px !important;
+    }
+    
+    /* Input-Feld klein */
+    .answer-input {
+        padding: 4px !important;
+        font-size: 16px !important;
+        margin-bottom: 3px !important;
+        border: 1px solid #ddd !important;
+        border-radius: 3px !important;
+    }
+    
+    /* Multiple Choice extrem kompakt */
+    .choice-option {
+        padding: 4px 6px !important;
+        font-size: 12px !important;
+        margin-bottom: 2px !important;
+        border: 1px solid #ddd !important;
+        border-radius: 3px !important;
+    }
+    
+    /* Feedback minimal */
+    .feedback {
+        padding: 3px 5px !important;
+        font-size: 11px !important;
+        margin-top: 3px !important;
+        border-radius: 3px !important;
+    }
+    
+    /* Navigation über dem Input, nicht unten */
+    .quiz-navigation {
+        position: relative !important;
+        background: rgba(248, 249, 250, 0.98) !important;
+        padding: 5px !important;
+        border: 1px solid #ddd !important;
+        border-radius: 3px !important;
+        margin: 0 0 10px 0 !important;
+        display: flex !important;
+        justify-content: space-around !important;
+        order: -1 !important; /* Oberhalb des Inputs platzieren */
+    }
+    
+    /* Input-Container neu anordnen */
+    #answer-container {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+    }
+    
+    /* Prüfen-Button und Navigation zusammen */
+    .answer-input {
+        padding: 4px !important;
+        font-size: 16px !important;
+        border: 1px solid #ddd !important;
+        border-radius: 3px !important;
+        margin-bottom: 0 !important;
+        order: 2 !important;
+    }
+    
+    /* Prüfen-Button in Navigation integrieren */
+    #answer-container button {
+        flex: 1 !important;
+        margin: 0 2px !important;
+        padding: 6px 4px !important;
+        font-size: 11px !important;
+        border-radius: 3px !important;
+        order: 1 !important;
+    }
+    
+    /* Feedback unter dem Input */
+    .feedback {
+        padding: 3px 5px !important;
+        font-size: 11px !important;
+        margin-top: 5px !important;
+        border-radius: 3px !important;
+        order: 3 !important;
+    }
+    
+    /* Container mit Platz für Tastatur */
     .container {
-        padding: 10px;
+        padding-bottom: 20px !important;
+        padding: 5px !important;
+    }
+    
+    /* Alle anderen Sektionen klein */
+    section {
+        padding: 5px !important;
+        margin-bottom: 5px !important;
     }
     
     h1 {
-        font-size: 2em;
+        font-size: 20px !important;
+        margin-bottom: 5px !important;
     }
     
-    .mode-options {
-        grid-template-columns: 1fr;
+    h2 {
+        font-size: 16px !important;
+        margin-bottom: 5px !important;
     }
     
-    #units-container {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    /* Unit-Boxen klein */
+    .unit-checkbox {
+        padding: 3px 5px !important;
+        font-size: 11px !important;
+        margin-bottom: 2px !important;
     }
     
+    /* Mode-Options klein */
+    .mode-options label {
+        padding: 3px 5px !important;
+        font-size: 11px !important;
+        margin-bottom: 2px !important;
+    }
+    
+    /* Buttons klein */
     button {
-        width: 100%;
-        margin: 5px 0;
+        padding: 6px 8px !important;
+        font-size: 12px !important;
+        margin: 2px 0 !important;
+    }
+}
+
+/* iOS-spezifisch */
+@supports (-webkit-touch-callout: none) {
+    .container {
+        padding-bottom: 30px !important;
+    }
+    
+    .quiz-navigation {
+        padding-bottom: 5px !important;
     }
 }

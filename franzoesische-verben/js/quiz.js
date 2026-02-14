@@ -69,7 +69,8 @@ class VerbQuiz {
         this.totalQuestions = 0;
         this.currentQuestion = null;
         this.verbData = {};
-        this.strictAccents = true; // Neue Eigenschaft für Akzent-Prüfung
+        this.strictAccents = false; // Neue Eigenschaft für Akzent-Prüfung (default: aus)
+        this.strictUmlauts = false; // Neue Eigenschaft für Umlaut-Prüfung (default: aus)
         
         this.initializeEventListeners();
         this.loadUnits();
@@ -97,6 +98,14 @@ class VerbQuiz {
                 this.strictAccents = e.target.checked;
             });
         }
+        
+        // Event Listener für Umlaut-Checkbox
+        const strictUmlautsCheckbox = document.getElementById('strict-umlauts');
+        if (strictUmlautsCheckbox) {
+            strictUmlautsCheckbox.addEventListener('change', (e) => {
+                this.strictUmlauts = e.target.checked;
+            });
+        }
     }
     
     async loadUnits() {
@@ -105,7 +114,8 @@ class VerbQuiz {
             const knownFiles = [
                 { file: 'unit1_volet1.json', name: 'unit1_volet1' },
                 { file: 'unit3_volet3.json', name: 'unit3_volet3' },
-                { file: 'unit4_circumflex.json', name: 'unit4_circumflex' }
+                { file: 'unit4_circumflex.json', name: 'unit4_circumflex' },
+                { file: 'unit4_sonderzeichen.json', name: 'unit4_sonderzeichen' }
             ];
             
             this.units = [];
@@ -516,6 +526,16 @@ class VerbQuiz {
             };
             
             normalized = normalized.split('').map(char => accentMap[char] || char).join('');
+        }
+        
+        // Wenn Umlaute nicht streng geprüft werden sollen, entferne sie
+        if (!this.strictUmlauts) {
+            // Ersetze Umlaute durch Basis-Buchstaben
+            const umlautMap = {
+                'ä': 'ae', 'ö': 'oe', 'ü': 'ue', 'ß': 'ss'
+            };
+            
+            normalized = normalized.split('').map(char => umlautMap[char] || char).join('');
         }
         
         return normalized;

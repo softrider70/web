@@ -53,6 +53,28 @@ franzoesische-verben/
 └── README.md
 ```
 
+## Unit4 - Sonderzeichen-Übungen
+
+### Zweck
+Unit4 dient der gezielten Übung französischer Akzentzeichen und Sonderzeichen.
+
+### Inhalt
+- **Circumflex (^):** 9 Wörter (île, forêt, temple, fête, maître, hôte, fleuve, sœur)
+- **Akut (´):** 13 Wörter (malade, école, café, menu, jouer, aimer, beau, écrire, apprendre, habiter, escalier, clé, petit-déjeuner)
+- **Gravis (`):** 10 Wörter (d'où, là, déjà, seulement, devoir, depuis, pendant, mère, père, frère)
+
+### Datenstruktur
+Jedes Wort enthält:
+- Deutsche Übersetzung
+- Französisches Wort mit Akzent
+- Akzent-Typ zur Identifikation
+- Betroffener Vokal
+- Spezielle Übungsaufgabe
+- Beispielssatz
+
+### Datei
+`data/unit4_sonderzeichen.json` - 32 Übungen für französische Sonderzeichen
+
 ## Fortschritt
 
 ### ✅ Erledigt
@@ -68,13 +90,14 @@ franzoesische-verben/
 - [x] SSH-Deployment mit tar+ssh statt rsync
 - [x] Fokus-Management für verbesserte UX
 - [x] Flexible Unit-Auswahl basierend auf verfügbaren JSON-Dateien
+- [x] Unit4 für Sonderzeichen-Übungen erstellt (Circumflex ^, Akut ´, Gravis `)
 
 ### 🔄 Aktuelle Implementierung
 - **Frontend:** Reine JavaScript-Anwendung ohne PHP-Abhängigkeiten
 - **Daten:** Verb-Daten werden dynamisch aus JSON-Dateien im data/-Verzeichnis geladen
 - **Statistiken:** Client-seitig in localStorage (max. 200 Einträge)
 - **Deployment:** Automatisches Deploy mit Versionierung
-- **Unit-Erkennung:** Automatische Erkennung verfügbarer Unit-Dateien (unit1.json, unit1_volet1.json, unit3_volet3.json)
+- **Unit-Erkennung:** Automatische Erkennung verfügbarer Unit-Dateien (unit1_volet1.json, unit3_volet3.json, unit4_sonderzeichen.json)
 
 ## Deployment
 
