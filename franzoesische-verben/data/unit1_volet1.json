@@ -1,0 +1,23 @@
+[
+    {
+        "deutsch": "(jdn/etw.) vorstellen",
+        "franzosisch": "présenter qn/qc",
+        "person": "ich stelle vor",
+        "conjugation": "je présente",
+        "type": "regelmäßiges Verb (-er)"
+    },
+    {
+        "deutsch": "sich befinden, liegen",
+        "franzosisch": "se trouver",
+        "person": "ich befinde mich",
+        "conjugation": "je me trouve",
+        "type": "reflexives Verb"
+    },
+    {
+        "deutsch": "etw. durchqueren, etw. überqueren",
+        "franzosisch": "traverser qc",
+        "person": "ich durchquere",
+        "conjugation": "je traverse",
+        "type": "regelmäßiges Verb (-er)"
+    }
+]

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Französische Verben - Abfrage</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div data-app-version style="position:fixed;top:8px;left:8px;z-index:9999;background:rgba(0,0,0,0.65);color:#fff;padding:4px 8px;border-radius:6px;font-size:12px;line-height:1.2;"></div>
+    <div class="container">
+        <header>
+            <h1>Französische Verben Abfrage</h1>
+        </header>
+        
+        <main>
+            <section class="unit-selection">
+                <h2>Units auswählen</h2>
+                <div id="units-container">
+                    <!-- Units werden per JavaScript geladen -->
+                </div>
+            </section>
+            
+            <section class="quiz-mode">
+                <h2>Abfragemodus</h2>
+                <div class="mode-options">
+                    <label><input type="radio" name="mode" value="de-fr" checked> Deutsch → Französisch</label>
+                    <label><input type="radio" name="mode" value="fr-de"> Französisch → Deutsch</label>
+                    <label><input type="radio" name="mode" value="mixed"> Gemischt</label>
+                    <label><input type="radio" name="mode" value="multiple"> Multiple Choice</label>
+                </div>
+            </section>
+            
+            <section class="quiz-controls">
+                <button id="start-quiz">Abfrage starten</button>
+                <button id="show-stats">Statistik anzeigen</button>
+            </section>
+            
+            <section id="quiz-area" class="hidden">
+                <div class="question-container">
+                    <h3 id="question-text"></h3>
+                    <div id="answer-container"></div>
+                    <div class="feedback" id="feedback"></div>
+                </div>
+                <div class="quiz-navigation">
+                    <button id="next-question">Nächste Frage</button>
+                    <button id="end-quiz">Beenden</button>
+                </div>
+            </section>
+            
+            <section id="stats-area" class="hidden">
+                <h3>Statistik</h3>
+                <div id="stats-content"></div>
+                <button id="close-stats">Schließen</button>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/version.js?v=20260214-173727"></script>
+    <script src="js/quiz.js?v=20260214-173727"></script>
+</body>
+</html>

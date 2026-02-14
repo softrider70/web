@@ -1,0 +1,65 @@
+[
+    {
+        "deutsch": "etw. stellen, etw. setzen, etw. legen, auch: etw. anziehen",
+        "franzosisch": "mettre qc",
+        "person": "ich stelle",
+        "conjugation": "je mets",
+        "type": "unregelmäßiges Verb",
+        "conjugations": {
+            "je": "mets",
+            "tu": "mets",
+            "il/elle/on": "met",
+            "nous": "mettons",
+            "vous": "mettez",
+            "ils/elles": "mettent"
+        },
+        "beispiel": "Mets tes affaires dans l'armoire."
+    },
+    {
+        "deutsch": "etw. benutzen",
+        "franzosisch": "utiliser qc",
+        "person": "ich benutze",
+        "conjugation": "j'utilise",
+        "type": "regelmäßiges Verb (-er)"
+    },
+    {
+        "deutsch": "(jdm) etw. (ver-)leihen",
+        "franzosisch": "prêter qc (à qn)",
+        "person": "ich leihe",
+        "conjugation": "je prête",
+        "type": "regelmäßiges Verb (-er)",
+        "beispiel": "Je ne prête rien."
+    },
+    {
+        "deutsch": "etw. (aus-)leihen",
+        "franzosisch": "emprunter qc",
+        "person": "ich leihe aus",
+        "conjugation": "j'emprunte",
+        "type": "regelmäßiges Verb (-er)",
+        "beispiel": "J'emprunte des livres au CDI."
+    },
+    {
+        "deutsch": "kosten",
+        "franzosisch": "coûter",
+        "person": "es kostet",
+        "conjugation": "il coûte",
+        "type": "unregelmäßiges Verb",
+        "beispiel": "Elle coûte combien, ta console?"
+    },
+    {
+        "deutsch": "etw. bestellen",
+        "franzosisch": "commander qc",
+        "person": "ich bestelle",
+        "conjugation": "je commande",
+        "type": "regelmäßiges Verb (-er)",
+        "beispiel": "Je déteste commander en ligne."
+    },
+    {
+        "deutsch": "etw. in den Müll werfen",
+        "franzosisch": "mettre qc à la poubelle",
+        "person": "ich werfe etw. in den Müll",
+        "conjugation": "je mets qc à la poubelle",
+        "type": "Verbindung mit mettre",
+        "beispiel": "J'ai tout mis à la poubelle!"
+    }
+]

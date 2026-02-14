@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apache Test-Seite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .info-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #4CAF50;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .php-test {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Apache 2.4 Test-Seite</h1>
+        
+        <div class="info-box">
+            <h3>Server Information</h3>
+            <p><strong>Webserver:</strong> Apache 2.4 auf Synology DS918+</p>
+            <p><strong>Status:</strong> <span class="status">ONLINE</span></p>
+            <p><strong>Datum:</strong> <script>document.write(new Date().toLocaleDateString('de-DE'));</script></p>
+            <p><strong>Uhrzeit:</strong> <script>document.write(new Date().toLocaleTimeString('de-DE'));</script></p>
+        </div>
+
+        <div class="info-box">
+            <h3>Verbindungstest</h3>
+            <p>✅ HTML wird korrekt geladen</p>
+            <p>✅ CSS-Stile werden angewendet</p>
+            <p>✅ JavaScript funktioniert</p>
+        </div>
+
+        <div class="php-test">
+            <h3>PHP-Test</h3>
+            <p>Für PHP-Test: <a href="test.php">test.php</a> aufrufen</p>
+            <p>Dort werden PHP-Informationen und Server-Details angezeigt.</p>
+        </div>
+
+        <div class="info-box">
+            <h3>Nützliche Links</h3>
+            <ul>
+                <li><a href="phpinfo.php" style="color: #fff;">PHP-Info</a></li>
+                <li><a href="server-status" style="color: #fff;">Server-Status</a></li>
+                <li><a href="test-db.php" style="color: #fff;">Datenbank-Test</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
