@@ -151,25 +151,67 @@ bash deploy.sh
 }
 ```
 
-## Historie der Änderungen
+## Aktuelle Herausforderungen und Lösungen
 
-### PHP-Probleme und Lösung
-- **Problem:** PHP 500 Fehler auf Synology Nginx/PHP-FPM
-- **Lösung:** Daten direkt in JavaScript eingebettet, PHP-APIs umgangen
-- **Vorteil:** Schneller, keine Server-Abhängigkeiten, offline-fähig
+### iOS/Mobile Optimierung
+- **Problem:** Tastatur nimmt 50% des Bildschirms ein, Inhalte nicht sichtbar
+- **Lösung:** Kompaktes Layout mit Buttons über dem Input-Feld
+- **Implementierung:** 
+  - Mobile-spezifische CSS-Regeln mit `!important`
+  - Flex-Layout für Input-Container mit `order`-Reihenfolge
+  - Reduzierter Bottom-Padding (20px normal, 30px iOS)
+  - Cache-Busting mit Version-Parametern
 
-### Deployment-Optimierungen
-- **SSH-Key:** Korrekte Berechtigungen (600) und Windows-kompatible Pfade
-- **Dateiübertragung:** tar+ssh statt rsync für bessere Kompatibilität
-- **Versionierung:** Automatische Versionserstellung und Cache-Busting
+### Sonderzeichen-Validierung
+- **Problem:** Akzente (ê, é, â) und Umlaute (ä, ö, ü, ß) führen zu Fehlern
+- **Lösung:** Flexible Validierung mit Checkbox-Optionen
+- **Implementierung:**
+  - Zwei Checkboxen: "Akzente streng prüfen" und "Umlaute streng prüfen"
+  - `normalizeAnswer()` Funktion entfernt Sonderzeichen bei deaktivierter Prüfung
+  - Default: Beide Optionen deaktiviert für Tippfehler-Toleranz
 
-### UX-Verbesserungen
-- **Return-Taste:** Antwort prüfen → nächste Frage → Fokus auf Eingabe
-- **Zufallsauswahl:** Mindestens eine Unit wird beim Start vorausgewählt
-- **Statistiken:** Neueste Einträge oben, sortierte Tabelle
+### Dynamische Unit-Verwaltung
+- **Problem:** Unit-Dateien umbenannt, feste Liste nicht mehr aktuell
+- **Lösung:** Dynamische Dateierkennung mit Fallback
+- **Implementierung:**
+  - `knownFiles` Array mit aktuellen Dateien (unit1_volet1.json, unit3_volet3.json, unit4_*.json)
+  - `convertVerbData()` für verschiedene JSON-Formate
+  - qc/qn Entfernung in der Normalisierung
+
+## Technische Erkenntnisse
+
+### CSS-Prioritäten und Browser-Cache
+- **Erkenntnis:** Mobile Media Queries ohne `!important` werden ignoriert
+- **Lösung:** Alle Mobile-Stile mit `!important` erzwingen
+- **Cache-Busting:** CSS-Datei mit `?v=YYYYMMDD-HHMM` Parameter neu laden
+
+### Datenformat-Kompatibilität
+- **Altes Format:** `deutsch/franzosisch` mit `conjugation` String
+- **Neues Format:** `infinitiv/bedeutung` mit `konjugationen` Objekt
+- **Konvertierung:** Automatische Erkennung und Umwandlung in einheitliches Format
+
+### iOS-spezifische Herausforderungen
+- **Tastatur-Verhalten:** `font-size: 16px` verhindert Zoom
+- **Viewport:** `position: fixed` funktioniert nicht zuverlässig
+- **Lösung:** Relative Positionierung mit Flex-Layout
+
+## Offene Punkte
+
+### Performance-Optimierung
+- **Große JSON-Dateien:** Unit4 mit 32 Sonderzeichen-Übungen
+- **Mögliche Lösung:** Lazy Loading oder Datei-Aufteilung
+
+### Erweiterbarkeit
+- **Neue Units:** Automatische Erkennung zukünftiger Unit-Dateien
+- **Konfiguration:** Admin-Interface für Unit-Verwaltung
+
+### Accessibility
+- **Screen Reader:** Verbesserte ARIA-Labels
+- **Tastatur-Navigation:** Vollständige Steuerung ohne Touch
 
 ## Wichtige Hinweise
 - **Keine PHP-Abhängigkeiten:** Vollständige client-seitige Funktionalität
 - **localStorage-Grenze:** Maximal 200 Quiz-Einträge werden gespeichert
 - **Browser-Kompatibilität:** Moderner Browser mit localStorage-Unterstützung erforderlich
 - **Deployment:** Immer `deploy.sh` verwenden für konsistente Versionierung
+- **Mobile-Testing:** Cache leeren mit `Strg + F5` oder `Cmd + Shift + R` nach Updates
